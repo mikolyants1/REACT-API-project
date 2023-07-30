@@ -1,14 +1,14 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useRef,useEffect} from 'react'
 import './App.css'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import About from './About.jsx'
 export default function App(){
   const [name,setName]=useState('')
   const [gender,setGender]=useState('')
   const [status,setStatus]=useState('')
   const [type,setType]=useState('')
+
   const [inf,setInf]=useState({list:null})
   async function Fetch(){
   const data=(await axios.get(`https://rickandmortyapi.com/api/character`)).data
@@ -35,6 +35,9 @@ export default function App(){
        setInf({list:list})
       }
     return <div>
+      <header>
+       <h1>React Api project</h1>
+      </header>
       <div className='ser'>
       <input type="text" onChange={(e)=>setName(e.target.value)} />
       <input type="text" onChange={(e)=>setGender(e.target.value)} />
