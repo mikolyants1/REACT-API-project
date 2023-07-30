@@ -1,5 +1,6 @@
 import {useParams} from 'react-router-dom'
 import {useEffect,useState} from 'react'
+import {Link} from 'react-router-dom'
 import  axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 async function Fetch(id) {
@@ -57,13 +58,17 @@ export default function Episode(){
                     <div>
                         {json.characters.map((item,index)=>{
                             return <div key={index}>
+                               <Link to={`/${item.split('/')[5]}`}>
                                 <Name id={item} />
+                                </Link>
                             </div>
                         })}
                     </div>
                 </td>
             </tr>
         </div>
-        
+        <div>
+            <Link to='/'>Main</Link>
+        </div>
     </div>
 }

@@ -26,6 +26,9 @@ return <div className='item1'>
     </div>
 })}
 </div>
+<div>
+    <Link to='/'>Main</Link>
+    </div>
 </div>
 
 }

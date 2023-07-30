@@ -8,7 +8,6 @@ width: 100%;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 min-width: 600px;
-  font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -18,6 +17,7 @@ body{
   background-color: rgb(37, 36, 36);
   color: white;
 }
+
  .main{
   min-height: 600px;
   min-width: 500px;
