@@ -55,8 +55,8 @@ export default function Episode(){
                 <td>characters</td>
                 <td>
                     <div>
-                        {json.characters.map((item)=>{
-                            return <div>
+                        {json.characters.map((item,index)=>{
+                            return <div key={index}>
                                 <Name id={item} />
                             </div>
                         })}
