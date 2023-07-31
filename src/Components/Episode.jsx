@@ -4,8 +4,7 @@ import {Link} from 'react-router-dom'
 import  axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 async function Fetch(id) {
-    return await (await axios.get(`${id}`)).data
-    
+    return await (await axios.get(`${id}`)).data  
 }
 function Name({id}) {
 const {data,isLoading,isError}=useQuery(['data',id],()=>Fetch(id),{keepPreviousData:true,refetchOnWindowFocus:false})
@@ -33,11 +32,10 @@ export default function Episode(){
     }
      
     useEffect(()=>{
-     coin()
-     
+     coin()  
     },[])
     if (load)  return <div>....</div>
-    if (err ) return <div>error</div>
+    if (err) return <div>error</div>
     return <div>
         <div className='ep'>
             <tr>
@@ -59,8 +57,8 @@ export default function Episode(){
                         {json.characters.map((item,index)=>{
                             return <div key={index}>
                                <Link to={`/${item.split('/')[5]}`}>
-                                <Name id={item} />
-                                </Link>
+                                  <Name id={item} />
+                               </Link>
                             </div>
                         })}
                     </div>
@@ -68,7 +66,7 @@ export default function Episode(){
             </tr>
         </div>
         <div>
-            <Link to='/'>Main</Link>
+        <Link to='/'>Main</Link>
         </div>
     </div>
 }

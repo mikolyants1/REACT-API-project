@@ -8,10 +8,7 @@ width: 100%;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 min-width: 600px;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  
 }
 body{
   background-color: rgb(37, 36, 36);
@@ -26,6 +23,7 @@ body{
   width: 100%;
   row-gap: 20px;
   column-gap: 20px;
+  
  }
  .img{
   width: 200px;
@@ -53,7 +51,6 @@ a:hover{
   border-radius: 10px;
 }
 .item1{
-  
   width: 100%;
   border-radius: 20px;
 }
@@ -74,10 +71,11 @@ span{
   color:grey
 }
 .episodes{
-  width: 90%;
+  width: 60%;
   margin:10px auto;
   display: grid;
   grid-template-columns: repeat(auto-fill,minmax(100px,1fr));
+  
 }
 .img1{
   border-radius: 20px;
@@ -87,6 +85,7 @@ span{
 }
 .episode{
   margin: auto;
+  width: 160px;
   
 }
 h1 {

@@ -7,14 +7,21 @@ function Rout() {
         <Outlet />
     </div>
 }
+function Start(){
+    return <div>
+        <Outlet />
+    </div>
+}
 export default function Home(){
     return <Router>
             <Routes>
-                <Route path='/' element={<App />} />
-                <Route path='/episode' element={<Rout />}>
-                   <Route path=':id' element={<Episode />} />
-                </Route>
+                <Route path='/' element={<Start />}>
+                    <Route index element={<App />} />
+                    <Route path='episode' element={<Rout />}>
+                       <Route path=':id' element={<Episode />} />
+                     </Route>
                 <Route path=':id' element={<About />} />
+              </Route>
            </Routes>
         </Router>
 }

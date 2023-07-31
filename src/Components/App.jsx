@@ -8,7 +8,6 @@ export default function App(){
   const [gender,setGender]=useState('')
   const [status,setStatus]=useState('')
   const [type,setType]=useState('')
-
   const [inf,setInf]=useState({list:null})
   async function Fetch(){
   const data=(await axios.get(`https://rickandmortyapi.com/api/character`)).data
