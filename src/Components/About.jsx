@@ -22,7 +22,7 @@ return <div className='item1'>
 <div className='episodes'>
     {json.episode.map((item,index)=>{
     return <div className='episode' key={index}>
-    <Link to={`/episode/${item.split('/')[5]}`}>episode {item.split('/')[5]},</Link>   
+    <Link to={`${item.split('/')[5]}`}>episode {item.split('/')[5]},</Link>   
     </div>
 })}
 </div>

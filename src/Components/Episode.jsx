@@ -20,7 +20,7 @@ export default function Episode(){
     const [load,setLoad]=useState(true)
     async function coin() {
         try {
-           await fetch(`https://rickandmortyapi.com/api/episode/${params.id}`)
+           await fetch(`https://rickandmortyapi.com/api/episode/${params.par}`)
            .then((response)=>response.json())
            .then((data)=>setJson(data))
         } catch  {
