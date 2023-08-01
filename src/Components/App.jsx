@@ -48,7 +48,7 @@ export default function App(){
       <div className='ser1'>
        <span>
         <label htmlFor="gender">gender:</label>
-         <input type="text" id='name'
+         <input type="text" id='gender'
           onChange={(e)=>setGender(e.target.value)} />
        </span>
       </div>  
