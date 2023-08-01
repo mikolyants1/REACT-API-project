@@ -17,6 +17,7 @@ export default function App(){
   const {data,isLoading,isError}=useQuery(["coins"],Fetch,{keepPreviousData:true,refetchOnWindowFocus:false})
   if (isLoading)  return <div>load...</div>
   if (isError)  return <div>err</div>
+  if (!inf.list) return <div>...</div>
   const sort=()=>{
       const val1=name.trim().toLocaleLowerCase()
       const val2=gender.trim().toLocaleLowerCase()
