@@ -38,11 +38,38 @@ export default function App(){
        <h1>React Api project</h1>
       </header>
       <div className='ser'>
-      <input type="text" onChange={(e)=>setName(e.target.value)} />
-      <input type="text" onChange={(e)=>setGender(e.target.value)} />
-      <input type="text" onChange={(e)=>setStatus(e.target.value)} />
-      <input type="text" onChange={(e)=>setType(e.target.value)}  />
-      <button onClick={sort}>sort</button>
+        <div className='ser1'>
+         <span>
+           <label htmlFor="name">name:</label>
+            <input type="text" id='name'
+             onChange={(e)=>setName(e.target.value)} />
+        </span>
+       </div>
+      <div className='ser1'>
+       <span>
+        <label htmlFor="gender">gender:</label>
+         <input type="text" id='name'
+          onChange={(e)=>setGender(e.target.value)} />
+       </span>
+      </div>  
+      <div className='ser1'>
+       <span>
+        <label htmlFor="status">status:</label>
+         <input type="text" id='status'
+          onChange={(e)=>setStatus(e.target.value)} />
+       </span> 
+      </div>
+       <div className='ser1'>
+        <span>
+         <label htmlFor="type">type:</label>
+          <input type="text" id='type'
+           onChange={(e)=>setType(e.target.value)} />
+       </span>
+      </div>
+      </div>
+      <div>
+      <button className='sort'
+       onClick={sort}>sort</button>
       </div>
       <div className='main'>
       {inf.list.map(({image,id,name,status,gender,type},index)=>{
