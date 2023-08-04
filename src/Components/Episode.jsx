@@ -1,5 +1,6 @@
 import {useParams} from 'react-router-dom'
 import {useEffect,useState} from 'react'
+import { Episode } from '../styles/style'
 import {Link} from 'react-router-dom'
 import  axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
@@ -15,14 +16,14 @@ return <div>{data.name}</div>
 
 export default function Episode(){
     const params=useParams()
-    const [json,setJson]=useState()
+    const [json,setJson]=useState(null)
     const [err,setErr]=useState(false)
     const [load,setLoad]=useState(true)
     async function coin() {
         try {
            await fetch(`https://rickandmortyapi.com/api/episode/${params.par}`)
            .then((response)=>response.json())
-           .then((data)=>setJson(data))
+           .then(setJson)
         } catch  {
             setErr(true)
         }
@@ -37,36 +38,36 @@ export default function Episode(){
     if (load)  return <div>....</div>
     if (err) return <div>error</div>
     return <div>
-        <div className='ep'>
-            <tr>
-                <td>Episode</td>
-                <td>{json.episode}</td>
-            </tr>
-            <tr>
+        <Episode>
+               <tr>
+                 <td>Episode</td>
+                 <td>{json.episode}</td>
+               </tr>
+             <tr>
                 <td>name</td>
                 <td>{json.name}</td>
-            </tr>
+             </tr>
             <tr>
-                <td>date</td>
-                <td>{json.air_date}</td>
+               <td>date</td>
+               <td>{json.air_date}</td>
             </tr>
-            <tr>
-                <td>characters</td>
-                <td>
-                    <div>
-                        {json.characters.map((item,index)=>{
-                            return <div key={index}>
+           <tr>
+              <td>characters</td>
+                 <td>
+                     <div>
+                        {json.characters.map((item,index)=>(
+                            <div key={index}>
                                <Link to={`/${item.split('/')[5]}`}>
                                   <Name id={item} />
                                </Link>
                             </div>
-                        })}
-                    </div>
-                </td>
-            </tr>
-        </div>
-        <div>
+                        ))}
+                     </div>
+                  </td>
+               </tr>
+            </Episode>
+          <div>
         <Link to='/'>Main</Link>
-        </div>
+       </div>
     </div>
 }

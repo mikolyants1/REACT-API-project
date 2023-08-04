@@ -3,6 +3,7 @@ import './App.css'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
+import { Search,SerLink,Main,Item ,SortButton} from '../styles/style'
 export default function App(){
   const [name,setName]=useState('')
   const [gender,setGender]=useState('')
@@ -15,7 +16,7 @@ export default function App(){
    return data.results
     }
   const {data,isLoading,isError}=useQuery(["coins"],Fetch,{keepPreviousData:true,refetchOnWindowFocus:false})
-  if (isLoading)  return <div>load...</div>
+  if (isLoading) return <div>load...</div>
   if (isError)  return <div>err</div>
   if (!inf.list) return <div>...</div>
   const sort=()=>{
@@ -38,44 +39,43 @@ export default function App(){
       <header>
        <h1>React Api project</h1>
       </header>
-      <div className='ser'>
-        <div className='ser1'>
+      <Search>
+        <SerLink>
          <span>
            <label htmlFor="name">name:</label>
             <input type="text" id='name'
              onChange={(e)=>setName(e.target.value)} />
         </span>
-       </div>
-      <div className='ser1'>
+       </SerLink>
+      <SerLink>
        <span>
         <label htmlFor="gender">gender:</label>
          <input type="text" id='gender'
           onChange={(e)=>setGender(e.target.value)} />
        </span>
-      </div>  
-      <div className='ser1'>
+      </SerLink>  
+      <SerLink>
        <span>
         <label htmlFor="status">status:</label>
          <input type="text" id='status'
           onChange={(e)=>setStatus(e.target.value)} />
        </span> 
-      </div>
-       <div className='ser1'>
+      </SerLink>
+       <SerLink>
         <span>
          <label htmlFor="type">type:</label>
           <input type="text" id='type'
            onChange={(e)=>setType(e.target.value)} />
-       </span>
-      </div>
-      </div>
+        </span>
+       </SerLink>
+      </Search>
       <div>
-      <button className='sort'
-       onClick={sort}>sort</button>
+      <SortButton onClick={sort}>sort</SortButton>
       </div>
-      <div className='main'>
-      {inf.list.map(({image,id,name,status,gender,type},index)=>{
-      return <div className='item' key={index}>
-      <img className='img' src={image} alt="" />
+      <Main>
+      {inf.list.map(({image,id,name,status,gender,type},index)=>(
+      <Item key={index}>
+      <img src={image} alt="" />
       <div className='info'>
       <div className='name'>
       <h1>
@@ -86,8 +86,8 @@ export default function App(){
    <div><span>gender:</span> {gender}</div>
    <div><span>type:</span> {type}</div>
    </div>
-    </div>
-  })}
-    </div>
+    </Item>
+  ))}
+    </Main>
     </div>
   }

@@ -15,22 +15,7 @@ body{
   color: white;
   min-height: 730px;
 }
-
- .main{
-  min-height: 600px;
-  min-width: 500px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(500px,1fr));
-  width: 100%;
-  row-gap: 20px;
-  column-gap: 20px;
-  
- }
- .img{
-  width: 200px;
-  height: 200px;
- }
-a {
+a{
   font-weight: 500;
   color: white;
   text-decoration: none;
@@ -42,19 +27,6 @@ a:hover{
   width: 100%;
   height: 100%;
 }
-.item{
-  margin: auto;
-  overflow: hidden;
-  display: flex;
-  width: 500px;
-  height: 200px;
-  background-color: rgb(78, 78, 78);
-  border-radius: 10px;
-}
-.item1{
-  width: 100%;
-  border-radius: 20px;
-}
 div{
   font-size: 20px;
 }
@@ -64,75 +36,21 @@ td{
   min-height: 50px;
   border:1px solid white ;
 }
-.ep{
-  width: 400px;
-  margin: auto;
-}
 span{
   color:grey
-}
-.episodes{
-  width: 60%;
-  margin:10px auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(100px,1fr));
-  
-}
-.img1{
-  border-radius: 20px;
-  width: 400px;
-  height: 400px;
-  margin: 30px auto -20px auto;
-}
-.episode{
-  margin: auto;
-  width: 160px;
-  
 }
 h1 {
   font-size: 30px;
 }
-.avatar{
-  width: 100%;
-  margin: auto;
-  text-align: center;
-}
+
 .name{
   margin-bottom: -20px;
-}
-input{
-  margin: auto;
-}
-.ser1{
-  margin: auto;
-  width: 200px;
-  justify-content: center;
-}
-.ser{ 
-  display: flex;
-flex-wrap: wrap;
-  width: 80%;
-  margin: 0px auto 0px auto;
-  justify-content:space-around ;
-}
-.sort{
-  margin-top: 20px;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  line-height: 5px;
-  width: 70px;
-  height: 30px;
-  border-radius: 5px;
-
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
   }
   button {
     background-color: #f9f9f9;
