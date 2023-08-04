@@ -70,7 +70,7 @@ width: 70px;
 height: 30px;
 border-radius: 5px;
 `
-export const Episode=styled.div`
+export const EpisodeForm=styled.div`
 width: 400px;
   margin: auto;
 `

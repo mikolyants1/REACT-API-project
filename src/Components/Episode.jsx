@@ -1,6 +1,6 @@
 import {useParams} from 'react-router-dom'
 import {useEffect,useState} from 'react'
-import { Episode } from '../styles/style'
+import { EpisodeForm } from '../styles/style'
 import {Link} from 'react-router-dom'
 import  axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
@@ -38,20 +38,20 @@ export default function Episode(){
     if (load)  return <div>....</div>
     if (err) return <div>error</div>
     return <div>
-        <Episode>
-               <tr>
-                 <td>Episode</td>
-                 <td>{json.episode}</td>
-               </tr>
-             <tr>
-                <td>name</td>
-                <td>{json.name}</td>
-             </tr>
-            <tr>
-               <td>date</td>
-               <td>{json.air_date}</td>
-            </tr>
-           <tr>
+        <EpisodeForm>
+          <tr>
+             <td>Episode</td>
+             <td>{json.episode}</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>{json.name}</td>
+        </tr>
+        <tr>
+           <td>date</td>
+           <td>{json.air_date}</td>
+        </tr>
+           <tr> 
               <td>characters</td>
                  <td>
                      <div>
@@ -65,7 +65,7 @@ export default function Episode(){
                      </div>
                   </td>
                </tr>
-            </Episode>
+            </EpisodeForm>
           <div>
         <Link to='/'>Main</Link>
        </div>
