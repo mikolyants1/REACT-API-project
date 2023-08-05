@@ -18,12 +18,12 @@ export default function Home(){
             <Routes>
                 <Route path='/' element={<Start />} >
                   <Route index element={<App />} />
+                  <Route path='loc' element={<Location />} />
                   <Route path=':id' element={<Rout />}>
                     <Route index element={<About  />} />
                      <Route path=':par' element={<Episode />} />
                   </Route>
               </Route>
-              <Route path='/loc' element={<Location />} />
            </Routes>
         </Router>
 }
