@@ -9,16 +9,16 @@ export default function App(){
   const [gender,setGender]=useState('')
   const [status,setStatus]=useState('')
   const [type,setType]=useState('')
-  const [inf,setInf]=useState({list:null})
+  const [inf,setInf]=useState(null)
   async function Fetch(){
-  const data=(await axios.get(`https://rickandmortyapi.com/api/character`)).data
-  setInf({list:data.results})
-   return data.results
+  const { results }=(await axios.get(`https://rickandmortyapi.com/api/character`)).data
+  setInf(results)
+  return results
     }
   const {data,isLoading,isError}=useQuery(["coins"],Fetch,{keepPreviousData:true,refetchOnWindowFocus:false})
   if (isLoading) return <div>load...</div>
   if (isError)  return <div>err</div>
-  if (!inf.list) return <div>...</div>
+  if (!inf) return <div>...</div>
   const sort=()=>{
       const val1=name.trim().toLocaleLowerCase()
       const val2=gender.trim().toLocaleLowerCase()
@@ -73,7 +73,7 @@ export default function App(){
       <SortButton onClick={sort}>sort</SortButton>
       </div>
       <Main>
-      {inf.list.map(({image,id,name,status,gender,type},index)=>(
+      {inf.map(({image,id,name,status,gender,type},index)=>(
       <Item key={index}>
       <img src={image} alt="" />
       <div className='info'>

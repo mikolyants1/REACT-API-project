@@ -1,14 +1,21 @@
-import {useEffect,useState} from 'react'
-import {useParams,Link,} from 'react-router-dom'
+import {Component} from 'react'
+import {useParams,Link} from 'react-router-dom'
 import { Character,Types,Series } from '../styles/style.jsx'
-export default function About(){
-const params=useParams()
-const [json,setJson]=useState(null)  
-useEffect(()=>{
+class Hero extends Component {
+    constructor(props){
+      super(props)
+      this.state={
+          json:null
+            }
+     }
+componentDidMount(){
+const params=this.props.params
 fetch(`https://rickandmortyapi.com/api/character/${params.id}`)
 .then(res=>res.json())
-.then(setJson)
-},[])
+.then((data)=>this.setState({json:data}))
+}
+render(){
+const json=this.state.json
 if (!json) return <div>loading...</div>
 return <Character>
 <img  src={json.image} alt="" />
@@ -26,9 +33,11 @@ return <Character>
     </div>
 })}
 </Series>
-<div>
+   <div>
     <Link to='/'>Main</Link>
-    </div>
+  </div>
 </Character>
-
 }
+}
+const About=()=><Hero params={useParams()} />
+export default About

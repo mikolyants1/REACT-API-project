@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import  axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 async function Fetch(id) {
-    return await (await axios.get(`${id}`)).data  
+    return (await axios.get(`${id}`)).data  
 }
 function Name({id}) {
 const {data,isLoading,isError}=useQuery(['data',id],()=>Fetch(id),{keepPreviousData:true,refetchOnWindowFocus:false})
@@ -13,16 +13,15 @@ if (isLoading) return <div>...</div>
 if (isError) return <div>error</div>
 return <div>{data.name}</div>
 }
-
 export default function Episode(){
     const params=useParams()
     const [json,setJson]=useState(null)
     const [err,setErr]=useState(false)
     const [load,setLoad]=useState(true)
-    async function coin() {
-        try {
+    async function Prom() {
+       try {
            await fetch(`https://rickandmortyapi.com/api/episode/${params.par}`)
-           .then((response)=>response.json())
+           .then(res=>res.json())
            .then(setJson)
         } catch  {
             setErr(true)
@@ -30,10 +29,9 @@ export default function Episode(){
         finally {
             setLoad(false)
         }
-    }
-     
+    }   
     useEffect(()=>{
-     coin()  
+     Prom()  
     },[])
     if (load)  return <div>....</div>
     if (err) return <div>error</div>
