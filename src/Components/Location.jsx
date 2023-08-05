@@ -16,7 +16,7 @@ if (isLoading) return <div>loading...</div>
 if (isError) return <div>error</div>
     return <div>
      <LocMain>
-      {data.map(({dimension,name,type},index)=>(
+      {data.map(({created,dimension,name,type},index)=>(
       <LocItem key={index}>  
       <div className='info'>
       <div className='name'>
@@ -26,6 +26,7 @@ if (isError) return <div>error</div>
     </div>
    <div><span>dimension:</span>{dimension}</div>
    <div><span>type:</span> {type}</div>
+   <div><span>created:</span>{created}</div>
    </div>
     </LocItem>
   ))}
