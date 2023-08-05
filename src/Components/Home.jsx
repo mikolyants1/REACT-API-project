@@ -13,22 +13,17 @@ function Start(){
         <Outlet />
     </div>
 }
-function Loc() {
-    return  <div>
-        <Outlet />
-    </div>
-}
 export default function Home(){
     return <Router>
             <Routes>
                 <Route path='/' element={<Start />} >
-                    <Route path='/loc' element={<Location />} />
                   <Route index element={<App />} />
                   <Route path=':id' element={<Rout />}>
                     <Route index element={<About  />} />
                      <Route path=':par' element={<Episode />} />
                   </Route>
               </Route>
+              <Route path='/loc' element={<Location />} />
            </Routes>
         </Router>
 }
