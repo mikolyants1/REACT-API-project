@@ -35,6 +35,9 @@ export default function App(){
        })
        setInf(list)
       }
+      const style={
+        marginTop:'80px'
+      }
     return <div>
       <header>
        <h1>React Api project</h1>
@@ -89,8 +92,10 @@ export default function App(){
     </Item>
   ))}
     </Main>
-    <div>
-      <Link to='/loc'>Locations</Link>
+    <div style={style}>
+      <Link to='/loc'>
+        <h3>Locations</h3>
+      </Link>
     </div>
     </div>
   }
