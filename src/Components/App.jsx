@@ -13,7 +13,7 @@ export default function App(){
   async function Fetch(){
   const { results }=(await axios.get(`https://rickandmortyapi.com/api/character`)).data
   setInf(results)
-  return results
+   return results
     }
   const {data,isLoading,isError}=useQuery(["coins"],Fetch,{keepPreviousData:true,refetchOnWindowFocus:false})
   if (isLoading) return <div>load...</div>
@@ -33,7 +33,7 @@ export default function App(){
        }).filter((item)=>{
         if (item.type.toLocaleLowerCase().indexOf(val4)!==-1) return item
        })
-       setInf({list:list})
+       setInf(list)
       }
     return <div>
       <header>
