@@ -89,5 +89,8 @@ export default function App(){
     </Item>
   ))}
     </Main>
+    <div>
+      <Link to='/loc'>Locations</Link>
+    </div>
     </div>
   }
