@@ -11,12 +11,12 @@ export default function Location(){
 const page=useStore(state=>state.page)
 const nextPage=useStore(state=>state.nextPage)
 const prevPage=useStore(state=>state.prevPage)
- const {data,isLoading,isError}=useQuery(["pages",page],()=>Pages(page))
+const {data,isLoading,isError}=useQuery(["pages",page],()=>Pages(page))
 if (isLoading) return <div>loading...</div>
 if (isError) return <div>error</div>
     return <div>
      <LocMain>
-      {data.map(({id,dimension,name,type},index)=>(
+      {data.map(({dimension,name,type},index)=>(
       <LocItem key={index}>  
       <div className='info'>
       <div className='name'>
@@ -24,7 +24,7 @@ if (isError) return <div>error</div>
        {name}
       </h1>
     </div>
-   <div><span>dimension:</span> {dimension}</div>
+   <div><span>dimension:</span>{dimension}</div>
    <div><span>type:</span> {type}</div>
    </div>
     </LocItem>
