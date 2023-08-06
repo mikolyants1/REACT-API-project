@@ -14,6 +14,8 @@ const prevPage=useStore(state=>state.prevPage)
 const {data,isLoading,isError}=useQuery(["pages",page],()=>Pages(page))
 if (isLoading) return <div>loading...</div>
 if (isError) return <div>error</div>
+const Next=page!==7?<SortButton onClick={()=>nextPage(page)}>next</SortButton>:null
+const Prev=page!==1?<SortButton onClick={()=>prevPage(page)}>prev</SortButton>:null
     return <div>
      <LocMain>
       {data.map(({created,dimension,name,type},index)=>(
@@ -32,8 +34,8 @@ if (isError) return <div>error</div>
   ))}
     </LocMain>
     <div>
-        <SortButton onClick={()=>prevPage(page)}>prev</SortButton>
-        <SortButton onClick={()=>nextPage(page)}>next</SortButton>
+        {Prev}
+        {Next}
     </div>
     <div>
         <Link to='/'>Main</Link>
