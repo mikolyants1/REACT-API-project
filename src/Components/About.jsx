@@ -15,7 +15,7 @@ axios.get(`https://rickandmortyapi.com/api/character/${id}`)
 .then(({data})=>this.setState({json:data}))
 }
 render(){
-const json=this.state.json   
+const {json}=this.state
 if (!json) return <div>loading...</div>
 return <Character>
 <img  src={json.image} alt="" />
