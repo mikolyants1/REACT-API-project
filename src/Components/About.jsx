@@ -2,16 +2,16 @@ import {Component} from 'react'
 import axios from 'axios'
 import {useParams,Link,} from 'react-router-dom'
 import { Character,Types,Series } from '../styles/style.jsx'
- class Hero extends Component {
-constructor(props){
+class Hero extends Component {
+ constructor(props){
     super(props)
     this.state={
-        json:null
+       json:null
     }
-}
+  }
 componentDidMount(){
-const params=this.props.params
-axios.get(`https://rickandmortyapi.com/api/character/${params.id}`)
+const {id}=this.props.params
+axios.get(`https://rickandmortyapi.com/api/character/${id}`)
 .then(({data})=>this.setState({json:data}))
 }
 render(){
@@ -27,15 +27,15 @@ return <Character>
 <Types><span>location:</span>{json.location.name}</Types>
 <div><span>Episodes:</span></div>
 <Series>
-    {json.episode.map((item,index)=>{
-    return <div className='episode' key={index}>
-    <Link to={`${item.split('/')[5]}`}>episode {item.split('/')[5]},</Link>   
-    </div>
+{json.episode.map((item,index)=>{
+return <div  key={index}>
+<Link to={`${item.split('/')[5]}`}>episode {item.split('/')[5]},</Link>   
+</div>
 })}
 </Series>
-<div>
+ <div>
     <Link to='/'>Main</Link>
-    </div>
+ </div>
 </Character>
 }
 }
