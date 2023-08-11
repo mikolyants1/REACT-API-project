@@ -18,20 +18,15 @@ export default function Episode(){
     const [json,setJson]=useState(null)
     const [err,setErr]=useState(false)
     const [load,setLoad]=useState(true)
-    async function Prom() {
-       try {
-           await fetch(`https://rickandmortyapi.com/api/episode/${params.par}`)
-           .then(res=>res.json())
-           .then(setJson)
-        } catch  {
-            setErr(true)
-        }
-        finally {
-            setLoad(false)
-        }
-    }   
     useEffect(()=>{
-     Prom()  
+    const Data=async ()=>{
+    return await fetch(`https://rickandmortyapi.com/api/episode/${params.par}`)
+    .then(res=>res.json())
+    .then(setJson)
+    .catch(()=>setErr(true))
+    .finally(()=>setLoad(false))
+      }
+    Data()
     },[])
     if (load)  return <div>....</div>
     if (err) return <div>error</div>
