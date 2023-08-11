@@ -9,9 +9,9 @@ class Hero extends Component {
        json:null
     }
   }
-componentDidMount(){
+async componentDidMount(){
 const {id}=this.props.params
-axios.get(`https://rickandmortyapi.com/api/character/${id}`)
+return await axios.get(`https://rickandmortyapi.com/api/character/${id}`)
 .then(({data})=>this.setState({json:data}))
 }
 render(){
