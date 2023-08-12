@@ -4,28 +4,22 @@ import { useQuery } from "@tanstack/react-query"
 import { LocMain,LocItem,SortButton } from "../styles/style"
 import {Link} from 'react-router-dom'
 async function Pages(page){
-    return await axios.get(`https://rickandmortyapi.com/api/location?page=${page}`)
-    .then(({data})=>data.results)   
+return await axios.get(`https://rickandmortyapi.com/api/location?page=${page}`)
+.then(({data})=>data.results)   
 }
 export default function Location(){
 const page=useStore(state=>state.page)
-const nextPage=useStore(state=>state.nextPage)
-const prevPage=useStore(state=>state.prevPage)
+const next=useStore(state=>state.nextPage)
+const prev=useStore(state=>state.prevPage)
 const {data,isLoading,isError}=useQuery(["pages",page],()=>Pages(page))
 if (isLoading) return <div>loading...</div>
 if (isError) return <div>error</div>
-const Next=page!==7?<SortButton onClick={()=>nextPage(page)}>next</SortButton>:null
-const Prev=page!==1?<SortButton onClick={()=>prevPage(page)}>prev</SortButton>:null
     return <div>
      <LocMain>
       {data.map(({created,dimension,name,type},index)=>(
       <LocItem key={index}>  
       <div className='info'>
-      <div className='name'>
-      <h1>
-       {name}
-      </h1>
-    </div>
+   <div className='name'><h1>{name}</h1></div>
    <div><span>dimension:</span>{dimension}</div>
    <div><span>type:</span> {type}</div>
    <div><span>created:</span>{created}</div>
@@ -34,11 +28,33 @@ const Prev=page!==1?<SortButton onClick={()=>prevPage(page)}>prev</SortButton>:n
   ))}
     </LocMain>
     <div>
-        {Prev}
-        {Next}
+      <PrevButton
+       page={page}
+       onClick={()=>prev(page)}
+        />
+      <NextButton
+       page={page}
+       onClick={()=>next(page)}
+        />
     </div>
     <div>
         <Link to='/'>Main</Link>
     </div>
     </div>
+}
+const PrevButton=(props)=>{
+    if (props.page!==1) {
+    return <>
+    <SortButton {...props}>prev</SortButton>
+    </>
+    }
+    return null
+}
+const NextButton=(props)=>{
+    if (props.page!==7) {
+    return <>
+    <SortButton {...props}>next</SortButton>
+    </>
+    }
+    return null
 }
