@@ -28,8 +28,8 @@ export default function Episode(){
       }
     Data()
     },[])
-    if (load)  return <div>....</div>
     if (err) return <div>error</div>
+    if (load)  return <div>....</div>
     return <div>
         <EpisodeForm>
           <tr>

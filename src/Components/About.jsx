@@ -1,21 +1,24 @@
 import {Component} from 'react'
-import axios from 'axios'
 import {useParams,Link,} from 'react-router-dom'
 import { Character,Types,Series } from '../styles/style.jsx'
 class Hero extends Component {
  constructor(props){
     super(props)
     this.state={
-       json:null
+       json:null,
+       err:false
     }
   }
 async componentDidMount(){
 const {id}=this.props.params
-return await axios.get(`https://rickandmortyapi.com/api/character/${id}`)
-.then(({data})=>this.setState({json:data}))
+return await fetch(`https://rickandmortyapi.com/api/character/${id}`)
+.then(res=>res.json())
+.then((data)=>this.setState({json:data}))
+.catch(()=>this.setState({err:true}))
 }
 render(){
-const {json}=this.state
+const {json,err}=this.state
+if (err) return <div>error...</div>
 if (!json) return <div>loading...</div>
 return <Character>
 <img  src={json.image} alt="" />
