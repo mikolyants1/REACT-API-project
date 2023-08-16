@@ -3,40 +3,39 @@ import './App.css'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import { Search,SerLink,Main,Item ,SortButton} from '../styles/style'
+import { Search,SerLink,Main,Item,SortButton} from '../styles/style'
 export default function App(){
-  const [name,setName]=useState('')
-  const [gender,setGender]=useState('')
-  const [status,setStatus]=useState('')
-  const [type,setType]=useState('')
-  const [inf,setInf]=useState(null)
-  async function Fetch(){
-  const { results }=(await axios.get(`https://rickandmortyapi.com/api/character`)).data
+const [name,setName]=useState('')
+const [gender,setGender]=useState('')
+const [status,setStatus]=useState('')
+const [type,setType]=useState('')
+const [inf,setInf]=useState(null)
+async function Fetch(){
+const {results}=(await axios.get(`https://rickandmortyapi.com/api/character`)).data
   setInf(results)
-   return results
+  return results
+  }
+const {data,isLoading,isError}=useQuery(["coins"],Fetch,
+{keepPreviousData:true,refetchOnWindowFocus:false})
+if (isLoading) return <div>load...</div>
+if (isError)  return <div>err</div>
+if (!inf) return <div>...</div>
+const sort=()=>{
+const val=[name,gender,status,type].map(item=>item.trim().toLocaleLowerCase())
+console.log(val)
+const list=data.filter((item)=>{
+if (item.name.toLocaleLowerCase().indexOf(val[0])!==-1) return item
+  }).filter((item)=>{
+if (item.gender.toLocaleLowerCase().indexOf(val[1])!==-1) return item
+  }).filter((item)=>{
+if (item.status.toLocaleLowerCase().indexOf(val[2])!==-1) return item
+  }).filter((item)=>{
+if (item.type.toLocaleLowerCase().indexOf(val[3])!==-1) return item
+  })
+  setInf(list)
     }
-  const {data,isLoading,isError}=useQuery(["coins"],Fetch,{keepPreviousData:true,refetchOnWindowFocus:false})
-  if (isLoading) return <div>load...</div>
-  if (isError)  return <div>err</div>
-  if (!inf) return <div>...</div>
-  const sort=()=>{
-      const val1=name.trim().toLocaleLowerCase()
-      const val2=gender.trim().toLocaleLowerCase()
-      const val3=status.trim().toLocaleLowerCase()
-      const val4=type.trim().toLocaleLowerCase()
-      const list=data.filter((item)=>{
-        if (item.name.toLocaleLowerCase().indexOf(val1)!==-1)  return item
-       }).filter((item)=>{
-        if (item.gender.toLocaleLowerCase().indexOf(val2)!==-1)  return item
-       }).filter((item)=>{
-        if (item.status.toLocaleLowerCase().indexOf(val3)!==-1)  return item
-       }).filter((item)=>{
-        if (item.type.toLocaleLowerCase().indexOf(val4)!==-1) return item
-       })
-       setInf(list)
-      }
-      const style={
-        marginTop:'80px'
+  const style={
+      marginTop:'80px'
       }
     return <div>
       <header>

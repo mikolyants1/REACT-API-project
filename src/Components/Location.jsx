@@ -11,7 +11,8 @@ export default function Location(){
 const page=useStore(state=>state.page)
 const next=useStore(state=>state.nextPage)
 const prev=useStore(state=>state.prevPage)
-const {data,isLoading,isError}=useQuery(["pages",page],()=>Pages(page))
+const {data,isLoading,isError}=useQuery(["pages",page],()=>Pages(page),
+{keepPreviousData:true,refetchOnWindowFocus:false})
 if (isLoading) return <div>loading...</div>
 if (isError) return <div>error</div>
     return <div>
@@ -49,7 +50,7 @@ const PrevButton=(props)=>{
     </>
     }
     return null
-}
+     }
 const NextButton=(props)=>{
     if (props.page!==7) {
     return <>

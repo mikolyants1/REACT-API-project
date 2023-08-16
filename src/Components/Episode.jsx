@@ -4,11 +4,10 @@ import { EpisodeForm } from '../styles/style'
 import {Link} from 'react-router-dom'
 import  axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-async function Fetch(id) {
-    return (await axios.get(`${id}`)).data  
-}
 function Name({id}) {
-const {data,isLoading,isError}=useQuery(['data',id],()=>Fetch(id),{keepPreviousData:true,refetchOnWindowFocus:false})
+const {data,isLoading,isError}=useQuery(['data',id],
+async ()=>await axios.get(`${id}`).then(({data})=>data),
+{keepPreviousData:true,refetchOnWindowFocus:false})
 if (isLoading) return <div>...</div>
 if (isError) return <div>error</div>
 return <div>{data.name}</div>
@@ -28,8 +27,8 @@ export default function Episode(){
       }
     Data()
     },[])
-    if (err) return <div>error</div>
     if (load)  return <div>....</div>
+    if (err) return <div>error</div>
     return <div>
         <EpisodeForm>
           <tr>
