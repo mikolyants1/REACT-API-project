@@ -3,7 +3,7 @@ import './App.css'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import { Search,SerLink,Main,Item,SortButton} from '../styles/style'
+import { Search,SerLink,Main,Item,SortButton,LocLink} from '../styles/style'
 export default function App(){
 const [name,setName]=useState('')
 const [gender,setGender]=useState('')
@@ -18,11 +18,10 @@ const {results}=(await axios.get(`https://rickandmortyapi.com/api/character`)).d
 const {data,isLoading,isError}=useQuery(["coins"],Fetch,
 {keepPreviousData:true,refetchOnWindowFocus:false})
 if (isLoading) return <div>load...</div>
-if (isError)  return <div>err</div>
+if (isError) return <div>err</div>
 if (!inf) return <div>...</div>
 const sort=()=>{
 const val=[name,gender,status,type].map(item=>item.trim().toLocaleLowerCase())
-console.log(val)
 const list=data.filter((item)=>{
 if (item.name.toLocaleLowerCase().indexOf(val[0])!==-1) return item
   }).filter((item)=>{
@@ -32,69 +31,102 @@ if (item.status.toLocaleLowerCase().indexOf(val[2])!==-1) return item
   }).filter((item)=>{
 if (item.type.toLocaleLowerCase().indexOf(val[3])!==-1) return item
   })
-  setInf(list)
+setInf(list)
+  }
+  return <div>
+          <header>
+            <h1>
+              React Api project
+            </h1>
+          </header>
+          <Search>
+            <SerLink>
+              <span>
+                <label htmlFor="name">
+                  name:
+                </label>
+                <SetInfo set={setName} />
+              </span>
+            </SerLink>
+            <SerLink>
+              <span>
+                <label htmlFor="gender">
+                  gender:
+                </label>
+                <SetInfo set={setGender} />
+              </span>
+           </SerLink>  
+           <SerLink>
+             <span>
+               <label htmlFor="status">
+                 status:
+               </label>
+               <SetInfo set={setStatus} />
+             </span> 
+           </SerLink>
+           <SerLink>
+             <span>
+               <label htmlFor="type">
+                 type:
+               </label>
+               <SetInfo set={setType} />
+             </span>
+          </SerLink>
+        </Search>
+        <div>
+          <SortButton onClick={sort}>
+             sort
+          </SortButton>
+        </div>
+        <Main>
+          {inf.map(({image,id,name,status,gender,type},index)=>(
+            <Item key={index}>
+              <img src={image} alt="" />
+              <div className='info'>
+                <div className='name'>
+                  <h1>
+                    <Link to={`/${id}`}>
+                      {name}
+                    </Link> 
+                  </h1>
+                </div>
+                <div>
+                  <span>
+                    status:
+                  </span>
+                   {status}
+                </div>
+                <div>
+                  <span>
+                    gender:
+                  </span> 
+                   {gender}
+                </div>
+                <div>
+                  <span>
+                    type:
+                  </span>
+                   {type}
+                </div>
+              </div>
+            </Item>
+           ))}
+       </Main>
+       <LocLink>
+         <Link to='/loc'>
+           <h3>
+             Locations
+           </h3>
+         </Link>
+       </LocLink>
+    </div>
+  }
+function SetInfo({set}){
+    const change=(e)=>{
+      set(e.target.value)
     }
-  const style={
-      marginTop:'80px'
-      }
-    return <div>
-      <header>
-       <h1>React Api project</h1>
-      </header>
-      <Search>
-        <SerLink>
-         <span>
-           <label htmlFor="name">name:</label>
-            <input type="text" id='name'
-             onChange={(e)=>setName(e.target.value)} />
-        </span>
-       </SerLink>
-      <SerLink>
-       <span>
-        <label htmlFor="gender">gender:</label>
-         <input type="text" id='gender'
-          onChange={(e)=>setGender(e.target.value)} />
-       </span>
-      </SerLink>  
-      <SerLink>
-       <span>
-        <label htmlFor="status">status:</label>
-         <input type="text" id='status'
-          onChange={(e)=>setStatus(e.target.value)} />
-       </span> 
-      </SerLink>
-       <SerLink>
-        <span>
-         <label htmlFor="type">type:</label>
-          <input type="text" id='type'
-           onChange={(e)=>setType(e.target.value)} />
-        </span>
-       </SerLink>
-      </Search>
-      <div>
-      <SortButton onClick={sort}>sort</SortButton>
-      </div>
-      <Main>
-      {inf.map(({image,id,name,status,gender,type},index)=>(
-      <Item key={index}>
-      <img src={image} alt="" />
-      <div className='info'>
-      <div className='name'>
-      <h1>
-       <Link to={`/${id}`}>{name}</Link> 
-      </h1>
-    </div>
-   <div><span>status:</span> {status}</div>
-   <div><span>gender:</span> {gender}</div>
-   <div><span>type:</span> {type}</div>
-   </div>
-    </Item>
-  ))}
-    </Main>
-    <div style={style}>
-      <Link to='/loc'>
-        <h3>Locations</h3>
-      </Link>
-    </div>
-    </div>
+     return <>
+      <input type="text" id='type'
+       onChange={change} />
+     </>
   }

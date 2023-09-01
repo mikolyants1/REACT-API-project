@@ -16,45 +16,68 @@ const {data,isLoading,isError}=useQuery(["pages",page],()=>Pages(page),
 if (isLoading) return <div>loading...</div>
 if (isError) return <div>error</div>
     return <div>
-     <LocMain>
-      {data.map(({created,dimension,name,type},index)=>(
-      <LocItem key={index}>  
-      <div className='info'>
-   <div className='name'><h1>{name}</h1></div>
-   <div><span>dimension:</span>{dimension}</div>
-   <div><span>type:</span> {type}</div>
-   <div><span>created:</span>{created}</div>
-   </div>
-    </LocItem>
-  ))}
-    </LocMain>
-    <div>
-      <PrevButton
-       page={page}
-       onClick={()=>prev(page)}
-        />
-      <NextButton
-       page={page}
-       onClick={()=>next(page)}
-        />
-    </div>
-    <div>
-        <Link to='/'>Main</Link>
-    </div>
-    </div>
+            <LocMain>
+              {data.map(({created,dimension,name,type},i)=>(
+                <LocItem key={i}>  
+                  <div className='info'>
+                    <div className='name'>
+                      <h1>
+                        {name}
+                      </h1>
+                    </div>
+                    <div>
+                      <span>
+                        dimension:
+                      </span>
+                       {dimension}
+                    </div>
+                    <div>
+                      <span>
+                        type:
+                      </span> 
+                       {type}
+                    </div>
+                    <div>
+                      <span>
+                        created:
+                      </span>
+                       {created}
+                    </div>
+                  </div>
+                </LocItem>
+                ))}
+            </LocMain>
+            <div>
+              <PrevButton
+               page={page}
+               onClick={()=>prev(page)}
+               />
+              <NextButton
+               page={page}
+               onClick={()=>next(page)}
+              />
+           </div>
+           <div>
+             <Link to='/'>Main</Link>
+          </div>
+        </div>
 }
 const PrevButton=(props)=>{
-    if (props.page!==1) {
-    return <>
-    <SortButton {...props}>prev</SortButton>
+if (props.page!==1) {
+return <>
+      <SortButton {...props}>
+         prev
+      </SortButton>
     </>
     }
     return null
      }
 const NextButton=(props)=>{
-    if (props.page!==7) {
-    return <>
-    <SortButton {...props}>next</SortButton>
+if (props.page!==7) {
+return <>
+      <SortButton {...props}>
+         next
+      </SortButton>
     </>
     }
     return null

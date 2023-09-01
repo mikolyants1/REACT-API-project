@@ -14,6 +14,9 @@ width: 100%;
 margin: auto;
 text-align: center;
 `
+export const Status=styled.div`
+margin-top:-25px;
+`
 export const Series=styled.div`
 width: 60%;
   margin:10px auto;
@@ -48,6 +51,15 @@ min-height: 600px;
   row-gap: 20px;
   column-gap: 20px;
 `
+export const LocMain=styled.main`
+min-height: 600px;
+  min-width: 500px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+  width: 100%;
+  row-gap: 20px;
+  column-gap: 20px;
+`
 export const Item=styled.div`
 margin: auto;
 overflow: hidden;
@@ -61,6 +73,15 @@ border-radius: 10px;
   height: 200px;
 }
 `
+export const LocItem=styled.div`
+margin: auto;
+overflow: hidden;
+display: flex;
+width: 300px;
+height:300px;
+background-color: rgb(78, 78, 78);
+border-radius: 10px;
+`
 export const SortButton=styled.button`
 margin-top: 20px;
 margin-bottom: 20px;
@@ -73,4 +94,7 @@ border-radius: 5px;
 export const EpisodeForm=styled.div`
 width: 400px;
   margin: auto;
+`
+export const LocLink=styled.div`
+ margin-top:80px
 `

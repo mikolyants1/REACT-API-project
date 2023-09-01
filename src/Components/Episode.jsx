@@ -13,13 +13,13 @@ if (isError) return <div>error</div>
 return <div>{data.name}</div>
 }
 export default function Episode(){
-    const params=useParams()
+    const {par}=useParams()
     const [json,setJson]=useState(null)
     const [err,setErr]=useState(false)
     const [load,setLoad]=useState(true)
     useEffect(()=>{
     const Data=async ()=>{
-    return await fetch(`https://rickandmortyapi.com/api/episode/${params.par}`)
+    return await fetch(`https://rickandmortyapi.com/api/episode/${par}`)
     .then(res=>res.json())
     .then(setJson)
     .catch(()=>setErr(true))
@@ -27,28 +27,42 @@ export default function Episode(){
       }
     Data()
     },[])
-    if (load)  return <div>....</div>
+    if (load) return <div>....</div>
     if (err) return <div>error</div>
     return <div>
         <EpisodeForm>
           <tr>
-             <td>Episode</td>
-             <td>{json.episode}</td>
+             <td>
+               Episode
+             </td>
+             <td>
+               {json.episode}
+             </td>
           </tr>
           <tr>
-            <td>name</td>
-            <td>{json.name}</td>
+            <td>
+               name
+            </td>
+            <td>
+               {json.name}
+            </td>
         </tr>
         <tr>
-           <td>date</td>
-           <td>{json.air_date}</td>
+           <td>
+             date
+           </td>
+           <td>
+             {json.air_date}
+           </td>
         </tr>
            <tr> 
-              <td>characters</td>
+              <td>
+                characters
+              </td>
                  <td>
                      <div>
-                        {json.characters.map((item,index)=>(
-                            <div key={index}>
+                        {json.characters.map((item,i)=>(
+                            <div key={i}>
                                <Link to={`/${item.split('/')[5]}`}>
                                   <Name id={item} />
                                </Link>
