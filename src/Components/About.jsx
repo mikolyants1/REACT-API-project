@@ -10,11 +10,16 @@ class Hero extends Component {
     }
   }
 async componentDidMount(){
+const controller=new AbortController()
+const {signal}=controller
 const {id}=this.props.params
-return await fetch(`https://rickandmortyapi.com/api/character/${id}`)
+await fetch(`https://rickandmortyapi.com/api/character/${id}`,{signal})
 .then(res=>res.ok?res.json():this.setState({err:true}))
 .then(data=>this.setState({json:data}))
 .catch(()=>this.setState({err:true}))
+return ()=>{
+controller.abort()
+}
 }
 render(){
 const {json,err}=this.state

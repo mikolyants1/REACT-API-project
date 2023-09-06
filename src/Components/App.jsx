@@ -10,12 +10,12 @@ const [gender,setGender]=useState('')
 const [status,setStatus]=useState('')
 const [type,setType]=useState('')
 const [inf,setInf]=useState(null)
-async function Fetch(){
+async function Promise(){
 const {results}=(await axios.get(`https://rickandmortyapi.com/api/character`)).data
   setInf(results)
   return results
   }
-const {data,isLoading,isError}=useQuery(["coins"],Fetch,
+const {data,isLoading,isError}=useQuery(["coins"],Promise,
 {keepPreviousData:true,refetchOnWindowFocus:false})
 if (isLoading) return <div>load...</div>
 if (isError) return <div>err</div>
@@ -122,9 +122,9 @@ setInf(list)
     </div>
   }
 function SetInfo({set}){
-    const change=(e)=>{
-      set(e.target.value)
-    }
+  const change=(e)=>{
+    set(e.target.value)
+     }
      return <>
       <input type="text" id='type'
        onChange={change} />

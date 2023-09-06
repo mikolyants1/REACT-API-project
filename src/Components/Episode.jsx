@@ -6,7 +6,7 @@ import  axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 function Name({id}) {
 const {data,isLoading,isError}=useQuery(['data',id],
-async ()=>await axios.get(`${id}`).then(({data})=>data),
+async ()=>await fetch(`${id}`).then(res=>res.json()),
 {keepPreviousData:true,refetchOnWindowFocus:false})
 if (isLoading) return <div>...</div>
 if (isError) return <div>error</div>
@@ -18,14 +18,17 @@ export default function Episode(){
     const [err,setErr]=useState(false)
     const [load,setLoad]=useState(true)
     useEffect(()=>{
+    const cancelHand=axios.CancelToken.source()
     const Data=async ()=>{
-    return await fetch(`https://rickandmortyapi.com/api/episode/${par}`)
-    .then(res=>res.json())
-    .then(setJson)
+    return await axios.get(`https://rickandmortyapi.com/api/episode/${par}`)
+    .then(({data})=>setJson(data))
     .catch(()=>setErr(true))
     .finally(()=>setLoad(false))
       }
     Data()
+    return ()=>{
+   cancelHand.cancel()
+    }
     },[])
     if (load) return <div>....</div>
     if (err) return <div>error</div>
