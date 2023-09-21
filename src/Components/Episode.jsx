@@ -5,18 +5,18 @@ import {Link} from 'react-router-dom'
 import  axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 function Name({id}) {
-const {data,isLoading,isError}=useQuery(['data',id],
-async ()=>await fetch(`${id}`).then(res=>res.json()),
-{keepPreviousData:true,refetchOnWindowFocus:false})
+const {data,isLoading,isError}=useQuery({queryKey:['data',id],
+queryFn:async ()=>await fetch(`${id}`).then(res=>res.json()),
+keepPreviousData:true,refetchOnWindowFocus:false})
 if (isLoading) return <div>...</div>
 if (isError) return <div>error</div>
 return <div>{data.name}</div>
 }
 export default function Episode(){
-    const {par}=useParams()
     const [json,setJson]=useState(null)
     const [err,setErr]=useState(false)
     const [load,setLoad]=useState(true)
+    const {par}=useParams()
     useEffect(()=>{
     const cancelHand=axios.CancelToken.source()
     const Data=async ()=>{
@@ -28,7 +28,7 @@ export default function Episode(){
     Data()
     return ()=>{
    cancelHand.cancel()
-    }
+      }
     },[])
     if (load) return <div>....</div>
     if (err) return <div>error</div>
@@ -76,7 +76,9 @@ export default function Episode(){
                </tr>
             </EpisodeForm>
           <div>
-        <Link to='/'>Main</Link>
-       </div>
-    </div>
+          <Link to='/'>
+             Main
+          </Link>
+        </div>
+      </div>
 }

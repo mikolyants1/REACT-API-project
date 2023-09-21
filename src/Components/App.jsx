@@ -5,11 +5,9 @@ import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 import { Search,SerLink,Main,Item,SortButton,LocLink} from '../styles/style'
 export default function App(){
-const [name,setName]=useState('')
-const [gender,setGender]=useState('')
-const [status,setStatus]=useState('')
-const [type,setType]=useState('')
+const [state,setState]=useState({name:'',gender:'',status:'',type:''})
 const [inf,setInf]=useState(null)
+const arr=['name','gender','status','type']
 async function Promise(){
 const {results}=(await axios.get(`https://rickandmortyapi.com/api/character`)).data
   setInf(results)
@@ -20,16 +18,20 @@ const {data,isLoading,isError}=useQuery(["coins"],Promise,
 if (isLoading) return <div>load...</div>
 if (isError) return <div>err</div>
 if (!inf) return <div>...</div>
+const change=({target})=>{
+const val=target.value.trim().toLocaleLowerCase()
+setState(prev=>({...prev,[target.name]:val}))
+}
 const sort=()=>{
-const val=[name,gender,status,type].map(item=>item.trim().toLocaleLowerCase())
+const {name,gender,status,type}=state
 const list=data.filter((item)=>{
-if (item.name.toLocaleLowerCase().indexOf(val[0])!==-1) return item
+if (item.name.toLocaleLowerCase().indexOf(name)!==-1) return item
   }).filter((item)=>{
-if (item.gender.toLocaleLowerCase().indexOf(val[1])!==-1) return item
+if (item.gender.toLocaleLowerCase().indexOf(gender)!==-1) return item
   }).filter((item)=>{
-if (item.status.toLocaleLowerCase().indexOf(val[2])!==-1) return item
+if (item.status.toLocaleLowerCase().indexOf(status)!==-1) return item
   }).filter((item)=>{
-if (item.type.toLocaleLowerCase().indexOf(val[3])!==-1) return item
+if (item.type.toLocaleLowerCase().indexOf(type)!==-1) return item
   })
 setInf(list)
   }
@@ -40,38 +42,17 @@ setInf(list)
             </h1>
           </header>
           <Search>
-            <SerLink>
-              <span>
-                <label htmlFor="name">
-                  name:
-                </label>
-                <SetInfo set={setName} />
-              </span>
-            </SerLink>
-            <SerLink>
-              <span>
-                <label htmlFor="gender">
-                  gender:
-                </label>
-                <SetInfo set={setGender} />
-              </span>
-           </SerLink>  
-           <SerLink>
-             <span>
-               <label htmlFor="status">
-                 status:
-               </label>
-               <SetInfo set={setStatus} />
-             </span> 
-           </SerLink>
-           <SerLink>
-             <span>
-               <label htmlFor="type">
-                 type:
-               </label>
-               <SetInfo set={setType} />
-             </span>
-          </SerLink>
+            {arr.map(item=>(
+              <SerLink key={item}>
+               <span>
+                 <label htmlFor={item}>
+                     {item}:
+                  </label>
+                  <input  onChange={change} name={item}
+                   id={item} type="text" />
+               </span>
+             </SerLink>
+            ))}
         </Search>
         <div>
           <SortButton onClick={sort}>
@@ -120,13 +101,4 @@ setInf(list)
          </Link>
        </LocLink>
     </div>
-  }
-function SetInfo({set}){
-  const change=(e)=>{
-    set(e.target.value)
-     }
-     return <>
-      <input type="text" id='type'
-       onChange={change} />
-     </>
   }
