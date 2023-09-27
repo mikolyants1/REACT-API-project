@@ -1,6 +1,6 @@
 import {useParams} from 'react-router-dom'
 import {useEffect,useState} from 'react'
-import { EpisodeForm } from '../styles/style'
+import { EpisodeForm,Table,View } from '../styles/style'
 import {Link} from 'react-router-dom'
 import  axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
@@ -32,53 +32,55 @@ export default function Episode(){
     },[])
     if (load) return <div>....</div>
     if (err) return <div>error</div>
-    return <div>
+return <>
         <EpisodeForm>
           <tr>
-             <td>
-               Episode
-             </td>
-             <td>
+             <Table>
+                 Episode
+             </Table>
+             <Table>
                {json.episode}
-             </td>
+             </Table>
           </tr>
           <tr>
-            <td>
+            <Table>
                name
-            </td>
-            <td>
+            </Table>
+            <Table>
                {json.name}
-            </td>
+            </Table>
         </tr>
         <tr>
-           <td>
+           <Table>
              date
-           </td>
-           <td>
+           </Table>
+           <Table>
              {json.air_date}
-           </td>
+           </Table>
         </tr>
            <tr> 
-              <td>
+              <Table>
                 characters
-              </td>
-                 <td>
-                     <div>
-                        {json.characters.map((item,i)=>(
-                            <div key={i}>
-                               <Link to={`/${item.split('/')[5]}`}>
-                                  <Name id={item} />
-                               </Link>
-                            </div>
-                        ))}
-                     </div>
-                  </td>
-               </tr>
-            </EpisodeForm>
-          <div>
-          <Link to='/'>
-             Main
-          </Link>
-        </div>
-      </div>
+              </Table>
+              <Table>
+                <View>
+                 {json.characters.map(item=>(
+                   <View key={item}>
+                     <Link to={`/${item.split('/').at(-1)}`}>
+                       <Name id={item} />
+                     </Link>
+                   </View>
+                    ))}
+                </View>
+              </Table>
+            </tr>
+          </EpisodeForm>
+          <View>
+            <Link to='/'>
+             <h2>
+               Main
+             </h2>
+           </Link>
+         </View>
+       </>
 }

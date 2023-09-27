@@ -1,6 +1,6 @@
 import {Component} from 'react'
 import {useParams,Link,} from 'react-router-dom'
-import { Character,Types,Series,Status } from '../styles/style.jsx'
+import { Character,Types,Series,Status,Title,Span,View } from '../styles/style.jsx'
 class Hero extends Component {
  constructor(props){
     super(props)
@@ -28,60 +28,60 @@ if (!json) return <div>loading...</div>
 
 return <Character>
          <img src={json.image} alt="" />
-         <div>
-           <h1>
+         <View>
+           <Title>
              {json.name}
-           </h1>
-         </div>
+           </Title>
+         </View>
          <Status>
-           <span>
+           <Span>
              status:
-           </span>
+           </Span>
            {json.status}
          </Status>
-         <div>
-           <span>
+         <View>
+           <Span>
              origin:
-           </span>
+           </Span>
            {json.origin.name}
-         </div>
+         </View>
          <Types>
-           <span>
+           <Span>
             species:
-           </span>
+           </Span>
            {json.species}
          </Types>
          <Types>
-           <span>
+           <Span>
              gender:
-           </span>
+           </Span>
            {json.gender}
          </Types>
          <Types>
-           <span>
+           <Span>
              location:
-           </span>
+           </Span>
            {json.location.name}
          </Types>
-         <div>
-           <span>
+         <View>
+           <Span>
              Episodes:
-           </span>
-         </div>
+           </Span>
+         </View>
          <Series>
            {json.episode.map(item=>(
-             <div key={item}>
-               <Link to={`${item.split('/')[5]}`}>
-                 episode {item.split('/')[5]},
+             <View key={item}>
+               <Link to={`${item.split('/').at(-1)}`}>
+                 episode {item.split('/').at(-1)},
                </Link>   
-             </div>
+             </View>
             ))}
          </Series>
-         <div>
+         <View>
            <Link to='/'>
              Main
            </Link>
-         </div>
+         </View>
        </Character>
     }
 }

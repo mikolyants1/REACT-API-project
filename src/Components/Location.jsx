@@ -1,10 +1,10 @@
 import { useStore } from "../store/store"
 import axios from 'axios'
 import { useQuery } from "@tanstack/react-query"
-import { LocMain,LocItem,SortButton } from "../styles/style"
+import { LocMain,LocItem,SortButton,InfoDiv,Text,Title,Span,View } from "../styles/style"
 import {Link} from 'react-router-dom'
-async function Pages(page){
-return await axios.get(`https://rickandmortyapi.com/api/location?page=${page}`)
+async function Pages(id){
+return await axios.get(`https://rickandmortyapi.com/api/location?page=${id}`)
 .then(({data})=>data.results)   
 }
 export default function Location(){
@@ -15,52 +15,56 @@ const {data,isLoading,isError}=useQuery({queryKey:["pages",page],
 queryFn:()=>Pages(page),keepPreviousData:true,refetchOnWindowFocus:false})
 if (isLoading) return <div>loading...</div>
 if (isError) return <div>error</div>
-    return <div>
+    return <>
             <LocMain>
-              {data.map(({created,dimension,name,type},i)=>(
-                <LocItem key={i}>  
-                  <div className='info'>
-                    <div className='name'>
-                      <h1>
+              {data.map(({created,dimension,name,type})=>(
+                <LocItem key={created}>  
+                  <InfoDiv>
+                    <Text>
+                      <Title>
                         {name}
-                      </h1>
-                    </div>
-                    <div>
-                      <span>
+                      </Title>
+                    </Text>
+                    <View>
+                      <Span>
                         dimension:
-                      </span>
+                      </Span>
                        {dimension}
-                    </div>
-                    <div>
-                      <span>
+                    </View>
+                    <View>
+                      <Span>
                         type:
-                      </span> 
+                      </Span> 
                        {type}
-                    </div>
-                    <div>
-                      <span>
+                    </View>
+                    <View>
+                      <Span>
                         created:
-                      </span>
+                      </Span>
                        {created}
-                    </div>
-                  </div>
+                    </View>
+                  </InfoDiv>
                 </LocItem>
                 ))}
             </LocMain>
-            <div>
+            <View>
               <PrevButton
                page={page}
-               onClick={()=>prev(page)}
+               onClick={prev}
                />
               <NextButton
                page={page}
-               onClick={()=>next(page)}
+               onClick={next}
               />
-           </div>
-           <div>
-             <Link to='/'>Main</Link>
-          </div>
-        </div>
+           </View>
+           <View>
+             <Link to='/'>
+              <h2>
+                Main
+              </h2>
+            </Link>
+          </View>
+        </>
 }
 const PrevButton=(props)=>{
 if (props.page!==1) {

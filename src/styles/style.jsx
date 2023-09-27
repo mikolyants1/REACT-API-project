@@ -2,11 +2,15 @@ import styled from 'styled-components'
 export const Character=styled.div`
 width: 100%;
 border-radius: 20px;
+font-size:20px;
+display:flex;
+flex-direction:column;
+align-items:center;
+margin-top:30px;
 & img {
   border-radius: 20px;
   width: 400px;
   height: 400px;
-  margin: 30px auto -20px auto;
 }
 `
 export const Types=styled.div`
@@ -23,35 +27,42 @@ width: 60%;
   display: grid;
   grid-template-columns: repeat(auto-fill,minmax(100px,1fr));
   & div {
-    margin: auto;
     width: 160px;  
   }
+`
+export const View=styled.div`
+text-align: center;
 `
 export const Search=styled.div`
 display: flex;
 flex-wrap: wrap;
-width: 80%;
+width: 70%;
 margin: 0px auto 0px auto;
 justify-content:space-around ;
 `
 export const SerLink=styled.div`
+text-align:center;
 margin: auto;
   width: 200px;
   justify-content: center;
-  & input {
-    margin:auto
-  }
+`
+export const Input=styled.input`
+  margin:auto;
+  border-radius:5px;
 `
 export const Main=styled.main`
+font-size:20px;
 min-height: 600px;
   min-width: 500px;
   display: grid;
   grid-template-columns: repeat(auto-fill,minmax(500px,1fr));
-  width: 100%;
+  width: 90%;
+  margin:auto;
   row-gap: 20px;
   column-gap: 20px;
 `
 export const LocMain=styled.main`
+font-size:20px;
 min-height: 600px;
   min-width: 500px;
   display: grid;
@@ -69,7 +80,7 @@ height: 200px;
 background-color: rgb(78, 78, 78);
 border-radius: 10px;
 & img {
-    width: 200px;
+  width: 200px;
   height: 200px;
 }
 `
@@ -94,7 +105,33 @@ border-radius: 5px;
 export const EpisodeForm=styled.div`
 width: 400px;
   margin: auto;
+  font-size:20px
 `
 export const LocLink=styled.div`
- margin-top:80px
+ margin-top:50px;
+ text-align:center;
+`
+export const InfoDiv=styled.div`
+  width: 100%;
+  height: 100%;
+`
+export const Span=styled.span`
+color:grey;
+
+`
+export const Table=styled.td`
+  width: 200px;
+  text-align: center;
+  min-height: 50px;
+  border:1px solid white ;
+`
+export const Title=styled.h1`
+  font-size: 30px;
+  text-align:center;
+`
+export const Text=styled.div`
+  margin-bottom: -20px;
+`
+export const Label=styled.label`
+font-size:20px;
 `

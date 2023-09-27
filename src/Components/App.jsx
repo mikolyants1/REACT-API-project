@@ -1,9 +1,9 @@
-import React,{useState} from 'react'
-import './App.css'
+import React,{useState,useId} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import { Search,SerLink,Main,Item,SortButton,LocLink} from '../styles/style'
+import { Search,SerLink,Main,Item,SortButton,LocLink,View,
+Input,Label,InfoDiv,Text,Title,Span} from '../styles/style'
 export default function App(){
 const [state,setState]=useState({name:'',gender:'',status:'',type:''})
 const [inf,setInf]=useState(null)
@@ -35,70 +35,81 @@ if (item.type.toLocaleLowerCase().indexOf(type)!==-1) return item
   })
 setInf(list)
   }
-  return <div>
-          <header>
-            <h1>
-              React Api project
-            </h1>
-          </header>
+  return <>
+          <Title>
+             React Api project
+          </Title>
           <Search>
             {arr.map(item=>(
-              <SerLink key={item}>
-               <span>
-                 <label htmlFor={item}>
-                     {item}:
-                  </label>
-                  <input  onChange={change} name={item}
-                   id={item} type="text" />
-               </span>
-             </SerLink>
+             <SerInput
+              key={item}
+              data={item}
+              onChange={change}
+             />
             ))}
-        </Search>
-        <div>
-          <SortButton onClick={sort}>
-             sort
-          </SortButton>
-        </div>
-        <Main>
-          {inf.map(({image,id,name,status,gender,type},index)=>(
-            <Item key={index}>
+          </Search>
+          <View>
+            <SortButton onClick={sort}>
+              sort
+            </SortButton>
+          </View>
+          <Main>
+           {inf.map(({image,id,name,status,gender,type})=>(
+            <Item key={id}>
               <img src={image} alt="" />
-              <div className='info'>
-                <div className='name'>
-                  <h1>
+              <InfoDiv>
+                <Text>
+                  <Title>
                     <Link to={`/${id}`}>
                       {name}
                     </Link> 
-                  </h1>
-                </div>
-                <div>
-                  <span>
+                  </Title>
+                </Text>
+                <View>
+                  <Span>
                     status:
-                  </span>
+                  </Span>
                    {status}
-                </div>
-                <div>
-                  <span>
+                </View>
+                <View>
+                  <Span>
                     gender:
-                  </span> 
+                  </Span> 
                    {gender}
-                </div>
-                <div>
-                  <span>
+                </View>
+                <View>
+                  <Span>
                     type:
-                  </span>
-                   {type}
-                </div>
-              </div>
+                  </Span>
+                   {!type?'unknown':type}
+                </View>
+              </InfoDiv>
             </Item>
            ))}
-       </Main>
-       <LocLink>
-         <Link to='/loc'>
-           <h3>
-             Locations
-           </h3>
-         </Link>
-       </LocLink>
-    </div>
+          </Main>
+          <LocLink>
+            <Link to='/loc'>
+              <h2>
+                Locations
+              </h2>
+            </Link>
+          </LocLink>
+        </>
+  }
+
+function SerInput(props){
+ const item=props.data
+ const id=useId()
+return (
+    <SerLink>
+      <Span>
+        <Label htmlFor={id}>
+            {item}:
+         </Label>
+         <Input {...props} id={id} 
+          name={item} type="text" 
+         />
+      </Span>
+    </SerLink>
+    )
   }
