@@ -10,8 +10,8 @@ const [inf,setInf]=useState(null)
 const arr=['name','gender','status','type']
 async function Promise(){
 const {results}=(await axios.get(`https://rickandmortyapi.com/api/character`)).data
-  setInf(results)
-  return results
+ setInf(results)
+ return results
   }
 const {data,isLoading,isError}=useQuery(["coins"],Promise,
 {keepPreviousData:true,refetchOnWindowFocus:false})
@@ -24,13 +24,13 @@ setState(prev=>({...prev,[target.name]:val}))
 }
 const sort=()=>{
 const {name,gender,status,type}=state
-const list=data.filter((item)=>{
+const list=data.filter(item=>{
 if (item.name.toLocaleLowerCase().indexOf(name)!==-1) return item
-  }).filter((item)=>{
+  }).filter(item=>{
 if (item.gender.toLocaleLowerCase().indexOf(gender)!==-1) return item
-  }).filter((item)=>{
+  }).filter(item=>{
 if (item.status.toLocaleLowerCase().indexOf(status)!==-1) return item
-  }).filter((item)=>{
+  }).filter(item=>{
 if (item.type.toLocaleLowerCase().indexOf(type)!==-1) return item
   })
 setInf(list)
@@ -50,7 +50,7 @@ setInf(list)
           </Search>
           <View>
             <SortButton onClick={sort}>
-              sort
+               sort
             </SortButton>
           </View>
           <Main>
@@ -85,7 +85,7 @@ setInf(list)
                 </View>
               </InfoDiv>
             </Item>
-           ))}
+             ))}
           </Main>
           <LocLink>
             <Link to='/loc'>

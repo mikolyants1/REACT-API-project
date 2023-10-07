@@ -1,12 +1,12 @@
 import {Component} from 'react'
 import {useParams,Link,} from 'react-router-dom'
 import { Character,Types,Series,Status,Title,Span,View } from '../styles/style.jsx'
-class Hero extends Component {
+class Person extends Component {
  constructor(props){
     super(props)
     this.state={
-      json:null,
-      err:false,
+     json:null,
+     err:false,
     }
   }
 async componentDidMount(){
@@ -25,7 +25,6 @@ render(){
 const {json,err}=this.state
 if (err) return <div>error...</div>
 if (!json) return <div>loading...</div>
-
 return <Character>
          <img src={json.image} alt="" />
          <View>
@@ -85,5 +84,5 @@ return <Character>
        </Character>
     }
 }
-const About=()=><Hero params={useParams()} />
+const About=()=><Person params={useParams()} />
 export default About
