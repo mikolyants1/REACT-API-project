@@ -13,6 +13,22 @@ margin-top:30px;
   height: 400px;
 }
 `
+export const Block=styled.div`
+width:100%;
+justify-content:center;
+display:flex;
+text-align:center
+`
+export const Spin=styled.div`
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  border-left:15px solid rgb(37, 36, 36);
+  border-top:15px solid white;
+  border-bottom:15px solid white;
+  border-right:15px solid white;
+  rotate:${props=>props.spin}deg
+`
 export const Types=styled.div`
 width: 100%;
 margin: auto;

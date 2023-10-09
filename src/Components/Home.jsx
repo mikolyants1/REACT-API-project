@@ -1,4 +1,4 @@
-import {Outlet,createBrowserRouter,RouterProvider,} from 'react-router-dom'
+import {Outlet,createBrowserRouter,RouterProvider} from 'react-router-dom'
 import About from './About.jsx'
 import App from './App.jsx'
 import Episode from './Episode.jsx'
@@ -6,7 +6,14 @@ import Location from './Location.jsx'
 import { useStore } from '../store/store.jsx'
 import { QueryClient,QueryClientProvider } from '@tanstack/react-query'
 import { View,SortButton } from '../styles/style.jsx'
-const query = new QueryClient()
+const query = new QueryClient({
+  defaultOptions:{
+    queries:{
+      keepPreviousData:true,
+      refetchOnWindowFocus:false,
+      }
+    }
+  })
 
 function Place(){
  const page=useStore(state=>state.page)

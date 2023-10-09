@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 import { Search,SerLink,Main,Item,SortButton,LocLink,View,
 Input,Label,InfoDiv,Text,Title,Span} from '../styles/style'
+import Loader,{Error} from './Loader'
 export default function App(){
 const [state,setState]=useState({name:'',gender:'',status:'',type:''})
 const [inf,setInf]=useState(null)
@@ -13,11 +14,10 @@ const {results}=(await axios.get(`https://rickandmortyapi.com/api/character`)).d
  setInf(results)
  return results
   }
-const {data,isLoading,isError}=useQuery(["coins"],Promise,
-{keepPreviousData:true,refetchOnWindowFocus:false})
-if (isLoading) return <div>load...</div>
-if (isError) return <div>err</div>
-if (!inf) return <div>...</div>
+const {data,isLoading,isError,error}=useQuery(
+["coins"],Promise,{staleTime:3*1000})
+if (isLoading||!inf) return <Loader />
+if (isError) return <Error send={error} />
 const change=({target})=>{
 const val=target.value.trim().toLocaleLowerCase()
 setState(prev=>({...prev,[target.name]:val}))
@@ -75,17 +75,17 @@ setInf(list)
                   <Span>
                     gender:
                   </Span> 
-                   {gender}
+                  {gender}
                 </View>
                 <View>
                   <Span>
                     type:
                   </Span>
-                   {!type?'unknown':type}
+                  {!type?'unknown':type}
                 </View>
               </InfoDiv>
             </Item>
-             ))}
+            ))}
           </Main>
           <LocLink>
             <Link to='/loc'>

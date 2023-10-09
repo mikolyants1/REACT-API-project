@@ -1,13 +1,12 @@
 import {useParams} from 'react-router-dom'
-import {useEffect,useState} from 'react'
 import { EpisodeForm,Table,View } from '../styles/style'
 import {Link} from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import useApi from './Custom.jsx'
+import Loader from './Loader'
 function Name({id}) {
 const {data,isLoading,isError}=useQuery({queryKey:['data',id],
-queryFn:async ()=>await fetch(`${id}`).then(res=>res.json()),
-keepPreviousData:true,refetchOnWindowFocus:false})
+queryFn:async ()=>await fetch(`${id}`).then(res=>res.json())})
 return <>
   {isLoading&&<>...</>}
   {isError&&<>err..</>}
@@ -15,9 +14,9 @@ return <>
       </>
 }
 export default function Episode(){
-  const {par:id}=useParams()
-  const {data,load,err}=useApi({url:`https://rickandmortyapi.com/api/episode`,id:id})
-   if (load) return <div>....</div>
+  const {par}=useParams()
+  const {data,load,err}=useApi({url:`https://rickandmortyapi.com/api/episode`,id:par})
+   if (load) return <Loader />
    if (err) return <div>error...</div>
 return <>
         <EpisodeForm>
