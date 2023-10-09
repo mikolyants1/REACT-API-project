@@ -118,7 +118,7 @@ width: 70px;
 height: 30px;
 border-radius: 5px;
 `
-export const EpisodeForm=styled.div`
+export const Table=styled.table`
 width: 400px;
   margin: auto;
   font-size:20px
@@ -135,11 +135,23 @@ export const Span=styled.span`
 color:grey;
 
 `
-export const Table=styled.td`
+export const Cell=styled.td`
   width: 200px;
   text-align: center;
   min-height: 50px;
   border:1px solid white ;
+`
+export const Head=styled.th`
+width: 200px;
+text-align: center;
+min-height: 50px;
+border:1px solid white ;
+`
+export const Header=styled.thead`
+width:100%
+`
+export const Body=styled.tbody`
+width:100%
 `
 export const Title=styled.h1`
   font-size: 30px;

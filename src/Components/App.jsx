@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 import { Search,SerLink,Main,Item,SortButton,LocLink,View,
-Input,Label,InfoDiv,Text,Title,Span} from '../styles/style'
+Input,Label,InfoDiv,Text,Title,Span, Block} from '../styles/style'
 import Loader,{Error} from './Loader'
 export default function App(){
 const [state,setState]=useState({name:'',gender:'',status:'',type:''})
@@ -14,10 +14,12 @@ const {results}=(await axios.get(`https://rickandmortyapi.com/api/character`)).d
  setInf(results)
  return results
   }
-const {data,isLoading,isError,error}=useQuery(
+const {data,isLoading,isError,error,isRefetching}=useQuery(
 ["coins"],Promise,{staleTime:3*1000})
-if (isLoading||!inf) return <Loader />
+if (isRefetching) return <Block>update...</Block>
+if (isLoading) return <Loader />
 if (isError) return <Error send={error} />
+if (!inf) return <Loader />
 const change=({target})=>{
 const val=target.value.trim().toLocaleLowerCase()
 setState(prev=>({...prev,[target.name]:val}))

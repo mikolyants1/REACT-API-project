@@ -1,9 +1,9 @@
 import {useParams} from 'react-router-dom'
-import { EpisodeForm,Table,View } from '../styles/style'
+import { Head,Cell,Table,View, Header, Body } from '../styles/style'
 import {Link} from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import useApi from './Custom.jsx'
-import Loader from './Loader'
+import useAxios from './Custom.jsx'
+import Loader, { Error } from './Loader'
 function Name({id}) {
 const {data,isLoading,isError}=useQuery({queryKey:['data',id],
 queryFn:async ()=>await fetch(`${id}`).then(res=>res.json())})
@@ -15,59 +15,67 @@ return <>
 }
 export default function Episode(){
   const {par}=useParams()
-  const {data,load,err}=useApi({url:`https://rickandmortyapi.com/api/episode`,id:par})
+  const {data,load,err,text}=useAxios({
+   url:`https://rickandmortyapi.com/api/episode/${par}`,
+   method:'GET',
+   body:null
+    })
    if (load) return <Loader />
-   if (err) return <div>error...</div>
+   if (err) return <Error send={text} />
 return <>
-        <EpisodeForm>
-          <tr>
-             <Table>
-                 Episode
-             </Table>
-             <Table>
-               {data.episode}
-             </Table>
-          </tr>
-          <tr>
-            <Table>
-               name
-            </Table>
-            <Table>
-               {data.name}
-            </Table>
-        </tr>
-        <tr>
-           <Table>
-             date
-           </Table>
-           <Table>
-             {data.air_date}
-           </Table>
-        </tr>
-           <tr> 
-              <Table>
+        <Table>
+          <Header>
+            <tr>
+              <Head>
+                Episode
+              </Head>
+              <Head>
+                {data.episode}
+              </Head>
+            </tr>
+          </Header>
+          <Body>
+            <tr>
+              <Cell>
+                 name
+              </Cell>
+              <Cell>
+                {data.name}
+              </Cell>
+            </tr>
+            <tr>
+              <Cell>
+                date
+              </Cell>
+              <Cell>
+               {data.air_date}
+              </Cell>
+            </tr>
+            <tr> 
+              <Cell>
                 characters
-              </Table>
-              <Table>
+              </Cell>
+              <Cell>
                 <View>
                  {data.characters.map(item=>(
-                   <View key={item}>
-                     <Link to={`/${item.split('/').at(-1)}`}>
-                       <Name id={item} />
-                     </Link>
-                   </View>
-                    ))}
+                  <View key={item}>
+                    <Link to={`/${item.split('/').at(-1)}`}>
+                      <Name id={item} />
+                    </Link>
+                  </View>
+                  ))}
                 </View>
-              </Table>
+              </Cell>
             </tr>
-          </EpisodeForm>
-          <View>
-            <Link to='/'>
-             <h2>
-               Main
-             </h2>
-           </Link>
-         </View>
-       </>
+          </Body>
+        </Table>
+        <View>
+          <Link to='/'>
+            <h2>
+              Main
+            </h2>
+          </Link>
+        </View>
+      </>
 }
 

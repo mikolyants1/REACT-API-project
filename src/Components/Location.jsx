@@ -9,8 +9,9 @@ return await axios.get(`https://rickandmortyapi.com/api/location?page=${id}`)
 .then(({data})=>data.results)   
 }
 export default function Location({page,children}){
-const {data,isLoading,isError,error}=useQuery({queryKey:["pages",page],
-queryFn:()=>Pages(page),staleTime:3*1000})
+const {data,isLoading,isError,error,isRefetching}=useQuery({
+queryKey:["pages",page],queryFn:()=>Pages(page),staleTime:3*1000})
+if (isRefetching) return <Block>update...</Block>
 if (isLoading) return <Loader />
 if (isError) return <Error send={error} />
     return <>

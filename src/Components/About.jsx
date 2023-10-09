@@ -1,13 +1,14 @@
 import {Component} from 'react'
 import {useParams,Link,} from 'react-router-dom'
 import { Character,Types,Series,Status,Title,Span,View } from '../styles/style.jsx'
-import Loader from './Loader.jsx'
+import Loader,{Error} from './Loader.jsx'
 class Person extends Component {
  constructor(props){
     super(props)
     this.state={
      json:null,
      err:false,
+     text:''
     }
   }
 async componentDidMount(){
@@ -15,16 +16,16 @@ const controller = new AbortController()
 const { signal } = controller
 const { id } = this.props.params
 await fetch(`https://rickandmortyapi.com/api/character/${id}`,{signal:signal})
-.then(res=>res.ok?res.json():this.setState({err:true}))
+.then(res=>res.ok?res.json():this.setState({err:true,text:res.status}))
 .then(data=>this.setState({json:data}))
-.catch(()=>this.setState({err:true}))
+.catch(error=>this.setState({err:true,text:error}))
 return ()=>{
 controller.abort()
   }
 }
 render(){
-const {json,err}=this.state
-if (err) return <div>error...</div>
+const {json,err,text}=this.state
+if (err) return <Error send={text} />
 if (!json) return <Loader />
 return <Character>
          <img src={json.image} alt="" />
