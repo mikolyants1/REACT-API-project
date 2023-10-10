@@ -23,23 +23,21 @@ function Place(){
     <Location page={page}>
       <View>
         <StepButton
-          page={page}
-          onClick={prev}
-          step={1}
-          text='prev'
+         onClick={prev}
+         step={page!==1}
+         text='prev'
          />
         <StepButton
-          page={page}
-          onClick={next}
-          step={7}
-          text='next'
+         onClick={next}
+         step={page!==7}
+         text='next'
          />
       </View>
     </Location>
   )
 }
 const StepButton=(props)=>{
-  if (props.page!==props.step) {
+  if (props.step) {
   return <>
         <SortButton {...props}>
           {props.text}

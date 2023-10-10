@@ -18,7 +18,7 @@ export default function Episode(){
   const {data,load,err,text}=useAxios({
    url:`https://rickandmortyapi.com/api/episode/${par}`,
    method:'GET',
-   body:null
+   body:{},
     })
    if (load) return <Loader />
    if (err) return <Error send={text} />
