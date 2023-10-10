@@ -1,5 +1,5 @@
 import {useParams} from 'react-router-dom'
-import { Head,Cell,Table,View, Header, Body } from '../styles/style'
+import { Head,Cell,Table,View, Header, Body,Row  } from '../styles/style'
 import {Link} from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import useAxios from './Custom.jsx'
@@ -25,33 +25,33 @@ export default function Episode(){
 return <>
         <Table>
           <Header>
-            <tr>
+            <Row>
               <Head>
                 Episode
               </Head>
               <Head>
                 {data.episode}
               </Head>
-            </tr>
+            </Row>
           </Header>
           <Body>
-            <tr>
+            <Row>
               <Cell>
                  name
               </Cell>
               <Cell>
                 {data.name}
               </Cell>
-            </tr>
-            <tr>
+            </Row>
+            <Row>
               <Cell>
                 date
               </Cell>
               <Cell>
                {data.air_date}
               </Cell>
-            </tr>
-            <tr> 
+            </Row>
+            <Row> 
               <Cell>
                 characters
               </Cell>
@@ -66,13 +66,13 @@ return <>
                   ))}
                 </View>
               </Cell>
-            </tr>
+            </Row>
           </Body>
         </Table>
         <View>
           <Link to='/'>
             <h2>
-              Main
+               Main
             </h2>
           </Link>
         </View>

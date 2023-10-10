@@ -22,38 +22,32 @@ function Place(){
   return (
     <Location page={page}>
       <View>
-        <PrevButton
+        <StepButton
           page={page}
           onClick={prev}
+          step={1}
+          text='prev'
          />
-        <NextButton
+        <StepButton
           page={page}
           onClick={next}
+          step={7}
+          text='next'
          />
       </View>
     </Location>
   )
 }
-const PrevButton=(props)=>{
-  if (props.page!==1) {
+const StepButton=(props)=>{
+  if (props.page!==props.step) {
   return <>
         <SortButton {...props}>
-           prev
+          {props.text}
         </SortButton>
       </>
       }
     return null
        }
-const NextButton=(props)=>{
-  if (props.page!==7) {
-  return <>
-        <SortButton {...props}>
-           next
-        </SortButton>
-      </>
-      }
-    return null
-  }
 const router=createBrowserRouter([
   {
     path:'/',

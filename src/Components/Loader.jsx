@@ -30,8 +30,8 @@ export function Error({send}){
              error {err}
          </Block>
          <Block>
-         {send.message?send.message:send}
-        </Block>
-        </>
+           {send.message?send.message:send}
+         </Block>
+       </>
     )
 }

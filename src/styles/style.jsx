@@ -120,8 +120,7 @@ border-radius: 5px;
 `
 export const Table=styled.table`
 width: 400px;
-  margin: auto;
-  font-size:20px
+margin: auto;
 `
 export const LocLink=styled.div`
  margin-top:50px;
@@ -146,6 +145,9 @@ width: 200px;
 text-align: center;
 min-height: 50px;
 border:1px solid white ;
+`
+export const Row=styled.tr`
+font-size:20px
 `
 export const Header=styled.thead`
 width:100%

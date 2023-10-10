@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 import { useQuery } from "@tanstack/react-query"
-import { LocMain,LocItem,InfoDiv,Text,Title,Span,View } from "../styles/style"
+import { LocMain,LocItem,InfoDiv,Text,Title,Span,View,Block } from "../styles/style"
 import Loader,{Error} from './Loader'
 import {Link} from 'react-router-dom'
 async function Pages(id){

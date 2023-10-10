@@ -6,8 +6,8 @@ export default function useAxios({url,method,body}){
     })
  useEffect(()=>{
   const Data = async () => {
-   const request=method=='GET'? axios.get(`${url}`)
-    : method=='POST'? axios.post(`${url}`,body)
+   const request = method === 'GET' ? axios.get(`${url}`)
+    : method === 'POST' ? axios.post(`${url}`,body)
     : axios.delete(`${url}`,body)
    return await request
    .then(({data})=>setJson(prev=>({...prev,data:data})))
