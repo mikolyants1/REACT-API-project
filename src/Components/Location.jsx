@@ -49,7 +49,9 @@ if (isError) return <Error send={error} />
             {children}
            <View>
              <Link to='/'>
-              <h2>Main</h2>
+              <h2>
+                Main
+              </h2>
             </Link>
           </View>
         </>

@@ -4,7 +4,7 @@ import { Block ,Spin } from '../styles/style';
 export default function Loader(){
  const [spin,setSpin]=useState(0)
   useEffect(()=>{
-   setInterval(() => {
+   setInterval(()=>{
     setSpin(x=>x==360?0:x+10)
     }, 50);
   },[])
@@ -15,7 +15,7 @@ export default function Loader(){
        )
      }
 export function Error({send}){
- const [err,setErr]=useState('')
+const [err,setErr]=useState('')
  useEffect(()=>{
   setInterval(() => {
    setTimeout(()=>setErr(''),0);

@@ -1,22 +1,22 @@
-import {useState,useEffect} from 'react'
+import {useEffect,useReducer} from 'react'
 import axios from 'axios'
 export default function useAxios({url,method,body}){
- const [json,setJson]=useState({
-  data:null,err:false,load:true,text:''
-    })
+ const [state,dispatch]=useReducer(
+(state,action)=>({...state,...action}),
+{text:'',data:null,err:false,load:true})
  useEffect(()=>{
   const Data = async () => {
    const request = method === 'GET' ? axios.get(`${url}`)
     : method === 'POST' ? axios.post(`${url}`,body)
     : axios.delete(`${url}`,body)
    return await request
-   .then(({data})=>setJson(prev=>({...prev,data:data})))
-   .catch(err=>setJson(prev=>({...prev,err:true,text:err})))
-   .finally(()=>setJson(prev=>({...prev,load:false})))
+   .then(({data})=>dispatch({data:data}))
+   .catch(err=>dispatch({err:true,text:err}))
+   .finally(()=>dispatch({load:false}))
     }
    Data()
   
   },[url])
 
-  return json
+  return state
 }
