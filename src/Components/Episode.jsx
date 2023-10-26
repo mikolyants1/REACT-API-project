@@ -57,10 +57,10 @@ return <>
               </Cell>
               <Cell>
                 <View>
-                 {data.characters.map(item=>(
-                  <View key={item}>
-                    <Link to={`/${item.split('/').at(-1)}`}>
-                      <Name id={item} />
+                 {data.characters.map(i=>(
+                  <View key={i}>
+                    <Link to={`/${i.split('/').at(-1)}`}>
+                      <Name id={i} />
                     </Link>
                   </View>
                   ))}

@@ -9,8 +9,8 @@ import { View,SortButton } from '../styles/style.jsx'
 const query = new QueryClient({
   defaultOptions:{
     queries:{
-      keepPreviousData:true,
-      refetchOnWindowFocus:false,
+     keepPreviousData:true,
+     refetchOnWindowFocus:false,
       }
     }
   })
