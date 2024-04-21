@@ -6,23 +6,23 @@ function ItemLocCard(props) {
   const {name,dimension,type,created} = props;
   const items = createLocItems(dimension,type,created);
   return (
-        <LocItem>  
-          <InfoDiv>
-            <Text>
-              <Title>
-                {name}
-              </Title>
-            </Text>
-            {items.map(({name,value})=>(
-              <View key={name}>
-                <Span>
-                 {name}:
-                </Span>
-                {value}
-             </View>
-            ))}
-          </InfoDiv>
-        </LocItem>
+      <LocItem>  
+        <InfoDiv>
+          <Text>
+            <Title>
+              {name}
+            </Title>
+          </Text>
+          {items.map(({name,value})=>(
+            <View key={name}>
+              <Span>
+               {name}:
+              </Span>
+              {value}
+            </View>
+           ))}
+        </InfoDiv>
+      </LocItem>
   )
 }
 
