@@ -1,4 +1,4 @@
-import React,{useState,useId,memo,useCallback} from 'react'
+import {useState,useId,memo,useCallback} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
